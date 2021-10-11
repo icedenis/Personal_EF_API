@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Personal_EF_API</name>
+    </assembly>
+    <members>
+        <member name="T:Personal_EF_API.Controllers.TestController">
+            <summary>
+             Home Controller Test API
+            </summary>
+        </member>
+        <member name="T:Personal_EF_API.Services.AuthorRepository">
+            <summary>
+            Thats the EF for Author Table Connects to DB then i have the the intefaces from the Base Repository 
+            </summary>
+        </member>
+    </members>
+</doc>
