@@ -74,8 +74,10 @@ namespace Personal_EF_API
 
             //here i add my Iauthor repository and Author services to connect the database 
             services.AddScoped<IAuthoRepository, AuthorRepository>();
+            //here i add book repository
+            services.AddScoped<IBookRepository, BookRepository>();
             // end
-
+            
 
 
 
