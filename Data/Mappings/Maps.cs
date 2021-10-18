@@ -13,6 +13,9 @@ namespace Personal_EF_API.Data.Mappings
         {
             CreateMap<Author, AuthorDTO>().ReverseMap();
             CreateMap<Book, BookDTO>().ReverseMap();
+            // thats for the Create new Author in the Dta transfer objects
+            CreateMap<Author, CreatAuthorDTO>().ReverseMap();
+            CreateMap<Author, UpdateAuthorDTO>().ReverseMap();
         }
     }
 }

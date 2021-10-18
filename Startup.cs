@@ -72,7 +72,7 @@ namespace Personal_EF_API
             // here we add Nlog Sevices
             services.AddSingleton<ILoggerService, LoggerService>();
 
-
+            //here i add my Iauthor repository and Author services to connect the database 
             services.AddScoped<IAuthoRepository, AuthorRepository>();
             // end
 

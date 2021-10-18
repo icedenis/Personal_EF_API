@@ -32,6 +32,10 @@ namespace Personal_EF_API.Controllers
             _logger = logger;
         }
         // GET: api/<TestController>
+    /// <summary>
+    ///  Tesvt get all from test
+    /// </summary>
+    /// <returns></returns>
         [HttpGet]
         public IEnumerable<string> Get()
         {

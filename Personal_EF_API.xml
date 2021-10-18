@@ -9,6 +9,12 @@
              Home Controller Test API
             </summary>
         </member>
+        <member name="M:Personal_EF_API.Controllers.TestController.Get">
+            <summary>
+             Tesvt get all from test
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Personal_EF_API.Services.AuthorRepository">
             <summary>
             Thats the EF for Author Table Connects to DB then i have the the intefaces from the Base Repository 

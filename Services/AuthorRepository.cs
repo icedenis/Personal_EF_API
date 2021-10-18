@@ -49,6 +49,12 @@ namespace Personal_EF_API.Services
             return author;
         }
 
+        public async Task<bool> isExist(int id)
+        {
+            return await _db.Authors.AnyAsync(q=> q.Id==id);
+           
+        }
+
         public  async Task<bool> Save()
         {
             //here the rest is done with EF functions thats how i save 
