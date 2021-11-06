@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 using Personal_EF_API.Data.Mappings;
 using Personal_EF_API.Interfaces;
 using Personal_EF_API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Personal_EF_API
 {
@@ -35,7 +38,9 @@ namespace Personal_EF_API
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //here i deleted the emeil token request and we add here the Role base as well .AddRoles<IdentityRole>()
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             //start
@@ -50,7 +55,21 @@ namespace Personal_EF_API
             });
             //Here i define Automapper i need 2 packages Automapper and Automapper.Miscrsoft.Dependency...
             services.AddAutoMapper(typeof(Maps));
-
+            //here i add the JWT TOKEN
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(o => {
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience =Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    
+                };
+                });
 
             //here we add Swagger services c is the Token
             services.AddSwaggerGen(c => {
@@ -86,7 +105,9 @@ namespace Personal_EF_API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env
+            ,UserManager<IdentityUser> user_manager
+            ,RoleManager<IdentityRole> role_manager)
         {
             if (env.IsDevelopment())
             {
@@ -110,6 +131,11 @@ namespace Personal_EF_API
 
             //here add to Cores Policys
             app.UseCors("CorsPolicy");
+            //here i use .Wait its good to work around async methods
+            CoreData.Core(user_manager, role_manager).Wait();
+            //here i add my core data test users
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

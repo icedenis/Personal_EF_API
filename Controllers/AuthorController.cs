@@ -9,6 +9,7 @@ using AutoMapper;
 using Personal_EF_API.Data.Mappings;
 using Personal_EF_API.Data.Mappings.DTOs;
 using Personal_EF_API.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Personal_EF_API.Controllers
 {
@@ -40,6 +41,7 @@ namespace Personal_EF_API.Controllers
         /// </summary>
         /// <returns>List of Authors</returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAuthors()
         {
             try
@@ -61,6 +63,7 @@ namespace Personal_EF_API.Controllers
 
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAuthor(int id)
         {
             try
@@ -89,6 +92,7 @@ namespace Personal_EF_API.Controllers
         }
 
         [HttpPost]
+        //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> Create([FromBody] CreatAuthorDTO author)
         {
 
@@ -131,6 +135,8 @@ namespace Personal_EF_API.Controllers
         /// <param name="author"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize]
+        [Authorize(Roles = "Admin"+"Personal")]
         public async Task<IActionResult> UpdateAuthor( int id , [FromBody] UpdateAuthorDTO author)
         {
 
@@ -179,7 +185,8 @@ namespace Personal_EF_API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        
+        [Authorize]
+
         public async Task<IActionResult> DeleteAuthor(int id)
         {
 

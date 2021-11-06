@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal_EF_API", "Personal_EF_API.csproj", "{F2B23ACD-8305-4B01-BCBF-8B51BF8BC71B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personal_EF_API", "Personal_EF_API.csproj", "{F2B23ACD-8305-4B01-BCBF-8B51BF8BC71B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal_Server_App", "..\Personal_Server_App\Personal_Server_App.csproj", "{C9DEBDEE-A625-46A7-A2BB-8C0A5AE7562D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F2B23ACD-8305-4B01-BCBF-8B51BF8BC71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2B23ACD-8305-4B01-BCBF-8B51BF8BC71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2B23ACD-8305-4B01-BCBF-8B51BF8BC71B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9DEBDEE-A625-46A7-A2BB-8C0A5AE7562D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DEBDEE-A625-46A7-A2BB-8C0A5AE7562D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DEBDEE-A625-46A7-A2BB-8C0A5AE7562D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DEBDEE-A625-46A7-A2BB-8C0A5AE7562D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
