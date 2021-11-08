@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personal_EF_API", "Personal_EF_API.csproj", "{F2B23ACD-8305-4B01-BCBF-8B51BF8BC71B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal_Server_App", "..\Personal_Server_App\Personal_Server_App.csproj", "{C9DEBDEE-A625-46A7-A2BB-8C0A5AE7562D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personal_Server_App", "..\Personal_Server_App\Personal_Server_App.csproj", "{C9DEBDEE-A625-46A7-A2BB-8C0A5AE7562D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
