@@ -121,7 +121,8 @@ namespace Personal_EF_API.Controllers
                 {
                     _logger.LogInfo("Sucessfull Registration");
                     var user = await _user_Manager.FindByNameAsync(username);
-             
+
+                    await _user_Manager.AddToRoleAsync(user, "Personal");
                     return Ok(new { result.Succeeded});
                 }
                 _logger.LogInfo($"Unsucessfull  Registration {username}");

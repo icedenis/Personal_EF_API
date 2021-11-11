@@ -16,6 +16,8 @@ namespace Personal_EF_API.Data.Mappings.DTOs
         public string Password { get; set; }
 
         public string Email { get; set; }
+
+       
         // can add emeil here
     }
 }
