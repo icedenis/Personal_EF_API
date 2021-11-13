@@ -135,8 +135,8 @@ namespace Personal_EF_API.Controllers
         /// <param name="author"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize]
-        [Authorize(Roles = "Admin"+"Personal")]
+        //[Authorize]
+        //[Authorize(Roles = "Admin"+"Personal")]
         public async Task<IActionResult> UpdateAuthor( int id , [FromBody] UpdateAuthorDTO author)
         {
 
@@ -185,7 +185,7 @@ namespace Personal_EF_API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [Authorize]
+        //[Authorize]
 
         public async Task<IActionResult> DeleteAuthor(int id)
         {
