@@ -33,13 +33,17 @@ namespace Personal_EF_API.Services
 
         public async Task<IList<Book>> FindAll()
         {
-           var booklist =   await _db.Books.ToListAsync();
+           var booklist = await _db.Books
+                .Include(q => q.Author)
+                .ToListAsync();
             return booklist;
         }
 
         public async Task<Book> FindById(int id)
         {
-            var book = await _db.Books.FindAsync(id);
+            var book = await _db.Books
+                .Include(q => q.Author)
+                .FirstOrDefaultAsync(q => q.Id == id);
             return book;
         }
 

@@ -96,12 +96,12 @@ namespace Personal_EF_API
             //here i add book repository
             services.AddScoped<IBookRepository, BookRepository>();
             // end
-            
 
 
 
 
-            services.AddControllers();
+            // Here we add this  .AddNewtonsoftJson(op => op.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); cuz m.b the book lsit is empty 
+            services.AddControllers().AddNewtonsoftJson(op => op.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
