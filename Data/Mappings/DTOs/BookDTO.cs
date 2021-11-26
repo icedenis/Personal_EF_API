@@ -40,7 +40,8 @@ namespace Personal_EF_API.Data.Mappings.DTOs
         [Required]
         public string Title { get; set; }
         public int? Year { get; set; }
-      
+
+        public string Isbn { get; set; }
         [StringLength(200)]
         public string Summary { get; set; }
         public string Image { get; set; }
