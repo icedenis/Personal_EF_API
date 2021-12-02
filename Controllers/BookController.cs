@@ -8,7 +8,8 @@ using Personal_EF_API.Interfaces;
 using AutoMapper;
 using Personal_EF_API.Data.Mappings.DTOs;
 using Personal_EF_API.Data;
-
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 namespace Personal_EF_API.Controllers
 {
     [Route("api/[controller]")]
@@ -19,13 +20,15 @@ namespace Personal_EF_API.Controllers
         private readonly IBookRepository _bookRepository;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
+        //this does not work in webassembly 
+        private readonly IWebHostEnvironment _env;
 
-
-        public BookController(IBookRepository bookRepository, ILoggerService logger, IMapper mapper)
+        public BookController(IBookRepository bookRepository, ILoggerService logger, IMapper mapper, IWebHostEnvironment env)
         {
             _bookRepository = bookRepository;
             _logger = logger;
             _mapper = mapper;
+            _env = env;
         }
 
         /// <summary>
@@ -70,6 +73,17 @@ namespace Personal_EF_API.Controllers
                     return NotFound();
                 }
                 var response = _mapper.Map<BookDTO>(book);
+                if(string.IsNullOrEmpty(response.Image) == false)
+                {
+                  var imgpath =  GetImagePath(book.Image);
+                    //if it exist in the uloads cuz it gives me error when it does not have fiels in the Uloads folder
+                    if (System.IO.File.Exists(imgpath))
+                    {
+                        byte[] imgbyte = System.IO.File.ReadAllBytes(imgpath);
+                        response.Fileimg = Convert.ToBase64String(imgbyte);
+                    }
+
+                }
                 _logger.LogInfo($"Sucess! got Book with ID : {id}");
                 return Ok(response);
 
@@ -115,6 +129,16 @@ namespace Personal_EF_API.Controllers
                     throw new Exception();
 
                 }
+                //here i upload the img in the api folder
+                if(string.IsNullOrEmpty(book.Fileimg) == false)
+                {
+
+                    //https://docs.microsoft.com/en-us/dotnet/api/system.io.file.writeallbytes?view=net-6.0
+                    var imgPath = GetImagePath(book.Image);
+                    byte[] imageBytes = Convert.FromBase64String(book.Fileimg);
+                    System.IO.File.WriteAllBytes(imgPath, imageBytes);
+                }
+
                 return Created("Create", new { addbook });
 
             }
@@ -215,7 +239,11 @@ namespace Personal_EF_API.Controllers
         }
 
 
-
+        private string GetImagePath(string fileName)
+        {
+            return ($"{_env.ContentRootPath}\\uploads\\{fileName}");
+        }
+           
 
     }
 }

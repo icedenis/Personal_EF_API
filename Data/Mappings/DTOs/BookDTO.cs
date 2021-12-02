@@ -18,6 +18,8 @@ namespace Personal_EF_API.Data.Mappings.DTOs
         public decimal? Price { get; set; }
         public int? AuthorId { get; set; }
         public virtual AuthorDTO Author { get; set; }
+
+        public string Fileimg { get; set; }
     }
     public class CreateBookDTO
     {
@@ -30,7 +32,8 @@ namespace Personal_EF_API.Data.Mappings.DTOs
         public string Image { get; set; }
         public decimal? Price { get; set; }
         [Required]
-        public int? AuthorId { get; set; }       
+        public int? AuthorId { get; set; }
+        public string Fileimg { get; set; }
 
     }
     public class UpdateBookDTO
@@ -48,6 +51,9 @@ namespace Personal_EF_API.Data.Mappings.DTOs
         public decimal? Price { get; set; }
 
         public int? AuthorId { get; set; }
+
+        //have to change the API so it can upload imgs from the WebAssembly
+        public string Fileimg { get; set; }
 
     }
 }
