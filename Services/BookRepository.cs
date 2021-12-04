@@ -47,6 +47,15 @@ namespace Personal_EF_API.Services
             return book;
         }
 
+        public  async Task<string> GetImageFileName(int id)
+        {
+            //getting Exeption bez  .AsNoTracking() sus nqma problemi
+            var book = await _db.Books
+                .AsNoTracking()
+                .FirstOrDefaultAsync(q => q.Id == id);
+            return book.Image;
+        }
+
         public  async  Task<bool> isExist(int id)
         {
             var isExist = await _db.Books.AnyAsync(q=>q.Id == id);

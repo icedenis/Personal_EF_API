@@ -175,6 +175,8 @@ namespace Personal_EF_API.Controllers
                 {
                     return BadRequest(ModelState);
                 }
+                var oldImage = await _bookRepository.GetImageFileName(id);
+
                 var book = _mapper.Map<Book>(bookupg);
                 var result = await _bookRepository.Update(book);
                 if (result == false)
@@ -182,6 +184,21 @@ namespace Personal_EF_API.Controllers
                     _logger.LogWarn($"Book update failed");
 
                 }
+                //tuka triq stariq img on Uploads
+                if (bookupg.Image.Equals(oldImage) == false)
+                {
+                    if (System.IO.File.Exists(GetImagePath(oldImage)))
+                    {
+                        System.IO.File.Delete(GetImagePath(oldImage));
+                    }
+                }
+                //tukq pravq new add to Uploads
+                if (string.IsNullOrEmpty(bookupg.Fileimg))
+                {
+                    byte[] imageBytes = Convert.FromBase64String(bookupg.Fileimg);
+                    System.IO.File.WriteAllBytes(GetImagePath(bookupg.Image), imageBytes);
+                }
+
                 return NoContent();
 
             }

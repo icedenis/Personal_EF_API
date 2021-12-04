@@ -8,6 +8,7 @@ namespace Personal_EF_API.Interfaces
 {
   public  interface  IBookRepository : IRepositoryBase<Book>
     {
-
+        //need for the update the file if the there is changes in the file name in the Uploads folder
+        public Task<string> GetImageFileName(int id);
     }
 }
