@@ -43,6 +43,21 @@ namespace Personal_EF_API.Controllers
                 _logger.LogInfo("Try to Get All Authors");
                 var listbooks = await _bookRepository.FindAll();
                 var response = _mapper.Map<IList<BookDTO>>(listbooks);
+                //tova mi trabvq che img ne izlizat an viev page 
+                foreach(var data in response)
+                {
+                    if (string.IsNullOrEmpty(data.Image) == false)
+                    {
+                        var imgpath = GetImagePath(data.Image);
+                        //if it exist in the uloads cuz it gives me error when it does not have fiels in the Uloads folder
+                        if (System.IO.File.Exists(imgpath))
+                        {
+                            byte[] imgbyte = System.IO.File.ReadAllBytes(imgpath);
+                            data.Fileimg = Convert.ToBase64String(imgbyte);
+                        }
+
+                    }
+                }
                 _logger.LogInfo("Sucessfully got All");
                 return Ok(response);
 
