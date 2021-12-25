@@ -208,7 +208,7 @@ namespace Personal_EF_API.Controllers
                     }
                 }
                 //tukq pravq new add to Uploads
-                if (string.IsNullOrEmpty(bookupg.Fileimg))
+                if (string.IsNullOrEmpty(bookupg.Fileimg) == false)
                 {
                     byte[] imageBytes = Convert.FromBase64String(bookupg.Fileimg);
                     System.IO.File.WriteAllBytes(GetImagePath(bookupg.Image), imageBytes);
